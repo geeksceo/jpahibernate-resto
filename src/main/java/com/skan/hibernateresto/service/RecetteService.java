@@ -2,17 +2,22 @@ package com.skan.hibernateresto.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.skan.hibernateresto.dao.RecetteDao;
 import com.skan.hibernateresto.entity.Recette;
 
-import jakarta.persistence.EntityManager;
-
+@Service
 public class RecetteService implements IRecetteService {
 	
 	private RecetteDao recetteDao;
 	
-	public RecetteService(EntityManager em) {
-		this.recetteDao = new RecetteDao(em);
+	public RecetteService() {}
+	
+	@Autowired
+	public RecetteService(RecetteDao recetteDao) {
+		this.recetteDao = recetteDao;
 	}
 
 	public void save(Recette recette) {

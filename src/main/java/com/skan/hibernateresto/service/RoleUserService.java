@@ -2,17 +2,22 @@ package com.skan.hibernateresto.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.skan.hibernateresto.dao.RoleUserDao;
 import com.skan.hibernateresto.entity.RoleUser;
 
-import jakarta.persistence.EntityManager;
-
+@Service
 public class RoleUserService implements IRoleUserService {
 
-	private final RoleUserDao roleUserDao;
+	private RoleUserDao roleUserDao;
 	
-	public RoleUserService(EntityManager em) {
-		this.roleUserDao = new RoleUserDao(em);
+	public RoleUserService() {}
+	
+	@Autowired
+	public RoleUserService(RoleUserDao roleUserDao) {
+		this.roleUserDao = roleUserDao;
 	}
 	
 	public void save(RoleUser roleUser) {

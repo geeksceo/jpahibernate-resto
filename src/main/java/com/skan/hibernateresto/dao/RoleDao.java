@@ -1,19 +1,31 @@
 package com.skan.hibernateresto.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.skan.hibernateresto.entity.Role;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
+@Repository
 public class RoleDao implements IRoleDao {
 
+	private EntityManagerFactory emf;
 	private EntityManager em;
-		
-	public RoleDao(EntityManager em) {
-		this.em = em;
+	
+	public RoleDao() {
+		this.emf = Persistence.createEntityManagerFactory( "restomanager-unit" );
+		this.em =  emf.createEntityManager();
 	}
 	
 	public void save(Role role) {
+		this.em.getTransaction().begin();
+		
 		this.em.persist(role);
+		
+		this.em.getTransaction().commit();
+		this.em.close();
 	}
 
 	public Role update(Role role) {

@@ -2,22 +2,26 @@ package com.skan.hibernateresto.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skan.hibernateresto.dao.IUserDao;
 import com.skan.hibernateresto.dao.UserDao;
 import com.skan.hibernateresto.entity.User;
-
-import jakarta.persistence.EntityManager;
  
+@Service
 public class UserService implements IUserService {
 	
-	private IUserDao userDao;
+	private UserDao userDao;
 	
-	public UserService(IUserDao userDao) {
-		this.userDao = userDao;
+	public UserService() {
+		System.out.println("Instantied by context - constructor 0");
 	}
 	
+	@Autowired
+	public UserService(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 	public void save(User user) {
 		if( this.findByEmail(user.getEmail()) == null 
 			|| this.findByUsername(user.getUsername()) == null) {

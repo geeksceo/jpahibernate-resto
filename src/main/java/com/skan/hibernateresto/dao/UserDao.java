@@ -1,20 +1,32 @@
 package com.skan.hibernateresto.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.skan.hibernateresto.entity.User;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
+@Repository
 public class UserDao implements IUserDao {
 
+	private EntityManagerFactory emf;
 	private EntityManager em;
 	
-	public UserDao(EntityManager em) {
-		this.em = em;
+	public UserDao() {
+		this.emf = Persistence.createEntityManagerFactory( "restomanager-unit" );
+		this.em =  emf.createEntityManager();
 	}
 
 	public void save(User user) {
+		this.em.getTransaction().begin();
+		
 		this.em.persist(user);
+		
+		this.em.getTransaction().commit();
+		this.em.close();
 	}
 
 	public User findById(long id) {
@@ -22,13 +34,19 @@ public class UserDao implements IUserDao {
 	}
 
 	public User update(User user) {
-		return this.em.merge(user);
+		this.em.getTransaction().begin();
+		
+		User updated = this.em.merge(user);
+		
+		this.em.getTransaction().commit();
+		this.em.close();
+		
+		return updated;
 	}
 
 	public User findByUsername(String username) {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE username LIKE :username", User.class);
 		query.setParameter("username", username);
-		User result = null;
 		return query.getSingleResult();
 	}
 
