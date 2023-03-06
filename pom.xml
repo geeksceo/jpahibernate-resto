@@ -6,16 +6,21 @@
   <name>HibernateResto</name>
   <description>HibernateResto</description>
   <dependencies>
-		  <dependency>
+		<dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-context</artifactId>
 	        <version>4.3.12.RELEASE</version>
 	    </dependency>
-	  <dependency>
-		  <groupId>jakarta.persistence</groupId>
-		  <artifactId>jakarta.persistence-api</artifactId>
-		  <version>3.0.0-RC2</version>
-	  </dependency>
+	    <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-orm</artifactId>
+		  <version>5.3.12</version>
+	 	</dependency>
+		  <dependency>
+			  <groupId>jakarta.persistence</groupId>
+			  <artifactId>jakarta.persistence-api</artifactId>
+			  <version>3.0.0-RC2</version>
+		  </dependency>
 	  <dependency>
 		  <groupId>mysql</groupId>
 		  <artifactId>mysql-connector-java</artifactId>

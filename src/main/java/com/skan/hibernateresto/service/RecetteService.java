@@ -8,18 +8,17 @@ import org.springframework.stereotype.Service;
 import com.skan.hibernateresto.dao.RecetteDao;
 import com.skan.hibernateresto.entity.Recette;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RecetteService implements IRecetteService {
 	
+	@Autowired
 	private RecetteDao recetteDao;
 	
 	public RecetteService() {}
-	
-	@Autowired
-	public RecetteService(RecetteDao recetteDao) {
-		this.recetteDao = recetteDao;
-	}
 
+	@Transactional
 	public void save(Recette recette) {
 		this.recetteDao.save(recette);
 	}

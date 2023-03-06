@@ -6,22 +6,22 @@ import org.springframework.stereotype.Service;
 import com.skan.hibernateresto.dao.RoleDao;
 import com.skan.hibernateresto.entity.Role;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RoleService implements IRoleService {
 	
+	@Autowired
 	private RoleDao roleDao;
 	
 	public RoleService() {}
 	
-	@Autowired
-	public RoleService(RoleDao roleDao) {
-		this.roleDao = roleDao;
-	}
-
+	@Transactional
 	public void save(Role role) {
 		this.roleDao.save(role);
 	}
-
+	
+	@Transactional
 	public Role update(Role role) {
 		return this.roleDao.update(role);
 	}

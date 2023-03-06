@@ -8,22 +8,22 @@ import org.springframework.stereotype.Service;
 import com.skan.hibernateresto.dao.RoleUserDao;
 import com.skan.hibernateresto.entity.RoleUser;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RoleUserService implements IRoleUserService {
 
+	@Autowired
 	private RoleUserDao roleUserDao;
 	
 	public RoleUserService() {}
-	
-	@Autowired
-	public RoleUserService(RoleUserDao roleUserDao) {
-		this.roleUserDao = roleUserDao;
-	}
-	
+
+	@Transactional
 	public void save(RoleUser roleUser) {
 		this.roleUserDao.save(roleUser);
 	}
 
+	@Transactional
 	public RoleUser update(RoleUser roleUser) {
 		return this.roleUserDao.update(roleUser);
 	}

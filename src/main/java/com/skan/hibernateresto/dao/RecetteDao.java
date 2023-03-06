@@ -9,26 +9,20 @@ import com.skan.hibernateresto.entity.Recette;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 @Repository
 public class RecetteDao implements IRecetteDao {
-
-	private EntityManagerFactory emf;
-	private EntityManager em;
 	
-	public RecetteDao() {
-		this.emf = Persistence.createEntityManagerFactory( "restomanager-unit" );
-		this.em =  emf.createEntityManager();
-	}
+	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("restomanager-unit");
+		// private EntityManager em = emf.createEntityManager();
+		
+		@PersistenceContext
+		private EntityManager em;
 	
 	public void save(Recette recette) {
-		this.em.getTransaction().begin();
-		
 		this.em.persist(recette);
-		
-		this.em.getTransaction().commit();
-		this.em.close();
 	}
 
 	public Recette findById(long id) {

@@ -7,26 +7,20 @@ import com.skan.hibernateresto.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 @Repository
 public class UserDao implements IUserDao {
 
-	private EntityManagerFactory emf;
-	private EntityManager em;
+	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("restomanager-unit");
+	// private EntityManager em = emf.createEntityManager();
 	
-	public UserDao() {
-		this.emf = Persistence.createEntityManagerFactory( "restomanager-unit" );
-		this.em =  emf.createEntityManager();
-	}
+	@PersistenceContext
+	private EntityManager em;
 
 	public void save(User user) {
-		this.em.getTransaction().begin();
-		
 		this.em.persist(user);
-		
-		this.em.getTransaction().commit();
-		this.em.close();
 	}
 
 	public User findById(long id) {

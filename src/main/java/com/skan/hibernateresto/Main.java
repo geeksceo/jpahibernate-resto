@@ -2,9 +2,6 @@ package com.skan.hibernateresto;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.skan.hibernateresto.dao.UserDao;
-import com.skan.hibernateresto.entity.User;
-
 public class Main {
 	
 	
@@ -20,11 +17,8 @@ public class Main {
 		
 		// (new Application()).process();
 	
-        // UserDao userDao = context.getBean(UserDao.class);
-        
-        // few test
-       //  userDao.save(new User("geeksceostest", "oowashina@skanci.com"));
-        
+        Application app = context.getBean(Application.class);
+        app.process();
         
         // close the spring context
         context.close();

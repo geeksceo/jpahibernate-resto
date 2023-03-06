@@ -7,25 +7,19 @@ import com.skan.hibernateresto.entity.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 
 @Repository
 public class RoleDao implements IRoleDao {
 
-	private EntityManagerFactory emf;
-	private EntityManager em;
-	
-	public RoleDao() {
-		this.emf = Persistence.createEntityManagerFactory( "restomanager-unit" );
-		this.em =  emf.createEntityManager();
-	}
+	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("restomanager-unit");
+		// private EntityManager em = emf.createEntityManager();
+		
+		@PersistenceContext
+		private EntityManager em;
 	
 	public void save(Role role) {
-		this.em.getTransaction().begin();
-		
 		this.em.persist(role);
-		
-		this.em.getTransaction().commit();
-		this.em.close();
 	}
 
 	public Role update(Role role) {
