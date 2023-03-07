@@ -1,13 +1,13 @@
 package com.skan.hibernateresto;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.skan.hibernateresto.config.AppConfig;
 
 public class Main {
 	
-	
 	public static void main(String[] args) {
 	  
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		context.scan("com.skan.hibernateresto");
 		context.refresh();
 		

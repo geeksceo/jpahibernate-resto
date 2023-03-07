@@ -18,8 +18,8 @@ public class RecetteDao implements IRecetteDao {
 	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("restomanager-unit");
 		// private EntityManager em = emf.createEntityManager();
 		
-		@PersistenceContext
-		private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 	
 	public void save(Recette recette) {
 		this.em.persist(recette);
